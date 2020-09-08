@@ -14,15 +14,11 @@ const Todo = () => {
         setNewTaskText(event.target.value);
     }    
 
-    const submitHandler = () => {
-
-    }
-
     return (
         <div>
             <ul>To do list</ul>
                 {state.map((item) => (
-                    <ol onClick={() => dispatch({type: "TOGGLE_TASK", payload: item.id})}>{item.task}</ol>
+                    <ol className={ item.completed ? 'completed-item' : null } onClick={() => dispatch({type: "TOGGLE_TASK", payload: item.id})}>{item.task}</ol>
                 ))}
             <div>
                 <form>
@@ -31,8 +27,9 @@ const Todo = () => {
                     name='newTaskText'
                     value={newTaskText}
                     onChange={handleChanges}
-                    />
-                    <div>
+                    />                    
+                </form>
+                <div>
                         <button onClick={() => {
                     dispatch({type: "ADD_TASK", payload: newTaskText})
                     }}>Add Task</button>
@@ -42,8 +39,7 @@ const Todo = () => {
                             dispatch({type: "CLEAR_COMPLETED"})
                         }}>Clear Completed</button>
                     </div>
-                    
-                </form>
+
             </div>
         </div>
     );
